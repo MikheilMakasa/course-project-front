@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { api } from '../constants';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
 
+  const cat = useLocation().search;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${api}/posts`);
+        const res = await axios.get(`${api}/posts${cat}`);
         setPosts(res.data);
       } catch (error) {
         console.log(error);
@@ -18,7 +20,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, []);
+  }, [cat]);
   // const posts = [
   //   {
   //     id: 1,
@@ -48,7 +50,7 @@ const Home = () => {
   return (
     <div className='home'>
       <div className='posts'>
-        {posts.map((post) => (
+        {posts?.map((post) => (
           <div key={post.id} className='post'>
             <div className='img'>
               <img src={post.img} alt={post.title} />

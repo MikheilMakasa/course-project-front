@@ -1,67 +1,68 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Menu from '../components/Menu';
+import axios from 'axios';
+import moment from 'moment';
+import { api } from '../constants';
+import { AuthContext } from '../context/authContext';
 
 const Single = () => {
+  const [post, setPost] = useState({});
+
+  const location = useLocation();
+  const postId = location.pathname.split('/')[2];
+
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${api}/posts/${postId}`);
+        console.log(res.data);
+        setPost(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [postId]);
   return (
     <div className='single'>
       <div className='content'>
-        <img
-          src='https://images.unsplash.com/photo-1521575107034-e0fa0b594529?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9zdHxlbnwwfHwwfHw%3D&w=1000&q=80'
-          alt='post'
-        />
+        <img src={post?.img} alt='post' />
         <div className='user'>
           <img
             src='https://images.unsplash.com/photo-1521575107034-e0fa0b594529?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9zdHxlbnwwfHwwfHw%3D&w=1000&q=80'
             alt='user'
           />
           <div className='info'>
-            <span>userName</span>
-            <p>Posted 2 days ago</p>
+            <span>{post?.username}</span>
+            <p>Posted {moment(post.date).fromNow()}</p>
           </div>
-          <div className='edit'>
-            <Link to={`/write?edit=2`}>
+          {currentUser?.username === post?.username ? (
+            <div className='edit'>
+              <Link to={`/write?edit=2`}>
+                <i
+                  className='bi bi-pencil-fill'
+                  style={{
+                    color: 'black',
+                    fontSize: '20px',
+                    cursor: 'pointer',
+                  }}
+                ></i>
+              </Link>
+
               <i
-                className='bi bi-pencil-fill'
+                className='bi bi-trash-fill'
                 style={{ color: 'black', fontSize: '20px', cursor: 'pointer' }}
               ></i>
-            </Link>
-
-            <i
-              className='bi bi-trash-fill'
-              style={{ color: 'black', fontSize: '20px', cursor: 'pointer' }}
-            ></i>
-          </div>
+            </div>
+          ) : null}
         </div>
-        <h1>Lorem ipsum dolor sit amet consectetur</h1>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt tempora
-          ad architecto quidem totam. Nobis omnis nemo sunt aperiam, modi
-          voluptatibus nesciunt reprehenderit cumque ab. Id aliquam, dolores
-          vero sequi beatae deleniti, ab voluptate deserunt dolorum velit quae
-          sit? Perferendis obcaecati error modi sequi unde, eaque ratione in
-          itaque laudantium aliquam autem minima esse. Totam, sunt blanditiis,
-          consequuntur molestiae culpa eaque asperiores aspernatur nisi facere,
-          odit ipsam accusantium enim porro magnam quidem modi magni? Voluptates
-          dicta et corporis consectetur itaque mollitia similique ex, quisquam
-          debitis facilis numquam ipsam cupiditate modi, culpa temporibus facere
-          at iusto fuga enim neque aut vel.
-          <br />
-          <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, velit
-          vero. Error nihil inventore iusto reprehenderit eos adipisci
-          aspernatur commodi? Dolore quos autem obcaecati possimus omnis eos
-          mollitia, nemo dolorum molestiae natus maxime alias quod tenetur
-          excepturi amet rerum quaerat aperiam doloremque voluptas harum? Ab
-          voluptatem est ex, et, accusamus nesciunt, quidem nobis repellendus
-          minus consequuntur nisi asperiores atque ipsum voluptatibus
-          reprehenderit recusandae nulla necessitatibus voluptate odit ea veniam
-          consequatur. Eius saepe corrupti praesentium dolore nesciunt expedita,
-          quas maxime officiis cum ratione deleniti. Asperiores perspiciatis cum
-          saepe modi commodi autem qui ipsam fugiat eveniet consequuntur, alias
-          aut quam, cumque ipsum!
-        </p>
+        <h1>{post?.title}</h1>
+        {post?.description}
       </div>
       <Menu />
     </div>
