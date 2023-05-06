@@ -47,6 +47,11 @@ const Home = () => {
   //     img: 'https://images.unsplash.com/photo-1521575107034-e0fa0b594529?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9zdHxlbnwwfHwwfHw%3D&w=1000&q=80',
   //   },
   // ];
+
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent;
+  };
   return (
     <div className='home'>
       <div className='posts'>
@@ -59,7 +64,7 @@ const Home = () => {
               <Link className='link' to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
-              <p>{post.description}</p>
+              <p>{getText(post.description)}</p>
               <button>Read More</button>
             </div>
           </div>

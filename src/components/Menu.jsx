@@ -9,18 +9,16 @@ const Menu = ({ cat, currentPostId }) => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${api}/posts/?cat=${cat}`);
-
         const filteredData = res.data.filter(
           (post) => post.id !== Number(currentPostId)
         );
-        console.log(filteredData);
+
         setPosts(filteredData);
       } catch (error) {
         console.log(error);
       }
     };
 
-    console.log('test');
     fetchData();
   }, [cat, currentPostId]);
 

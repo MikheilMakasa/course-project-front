@@ -33,11 +33,15 @@ const Single = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(`${api}/posts/${postId}`, { withCredentials: true });
-
       navigate('/');
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent;
   };
 
   return (
@@ -52,7 +56,7 @@ const Single = () => {
           </div>
           {currentUser?.username === post?.username ? (
             <div className='edit'>
-              <Link to={`/write?edit=2`}>
+              <Link to={`/write?edit=2`} state={post}>
                 <i
                   className='bi bi-pencil-fill'
                   style={{
@@ -72,7 +76,7 @@ const Single = () => {
           ) : null}
         </div>
         <h1>{post?.title}</h1>
-        {post?.description}
+        <p>{getText(post?.description)}</p>
       </div>
       <Menu cat={post.cat} currentPostId={postId} />
     </div>
