@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Menu from '../components/Menu';
 import axios from 'axios';
 import moment from 'moment';
@@ -12,6 +12,7 @@ const Single = () => {
 
   const location = useLocation();
   const postId = location.pathname.split('/')[2];
+  const navigate = useNavigate();
 
   const { currentUser } = useContext(AuthContext);
 
@@ -19,7 +20,7 @@ const Single = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${api}/posts/${postId}`);
-        console.log(res.data);
+
         setPost(res.data);
       } catch (error) {
         console.log(error);
@@ -28,15 +29,23 @@ const Single = () => {
 
     fetchData();
   }, [postId]);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${api}/posts/${postId}`);
+
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='single'>
       <div className='content'>
         <img src={post?.img} alt='post' />
         <div className='user'>
-          <img
-            src='https://images.unsplash.com/photo-1521575107034-e0fa0b594529?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9zdHxlbnwwfHwwfHw%3D&w=1000&q=80'
-            alt='user'
-          />
+          {post?.userImg && <img src={post?.userImg} alt='user' />}
           <div className='info'>
             <span>{post?.username}</span>
             <p>Posted {moment(post.date).fromNow()}</p>
@@ -57,6 +66,7 @@ const Single = () => {
               <i
                 className='bi bi-trash-fill'
                 style={{ color: 'black', fontSize: '20px', cursor: 'pointer' }}
+                onClick={handleDelete}
               ></i>
             </div>
           ) : null}
