@@ -20,7 +20,7 @@ const Menu = ({ cat, currentPostId }) => {
       }
     };
 
-    console.log(test);
+    console.log('test');
     fetchData();
   }, [cat, currentPostId]);
 
