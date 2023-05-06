@@ -20,8 +20,9 @@ const Menu = ({ cat, currentPostId }) => {
       }
     };
 
+    console.log(test);
     fetchData();
-  }, [cat]);
+  }, [cat, currentPostId]);
 
   return (
     <div className='menu'>
