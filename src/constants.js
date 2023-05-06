@@ -1,1 +1,3 @@
-export const api = 'http://localhost:8800/api';
+export const api = 'https://ureview-makasa.onrender.com/api';
+// https://ureview-makasa.onrender.com/
+// http://localhost:8800/api
