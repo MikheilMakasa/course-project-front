@@ -5,29 +5,20 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../constants';
 import axios from 'axios';
 import moment from 'moment';
+import UploadWidget from '../components/UploadWidget';
 
 const Write = () => {
   const state = useLocation().state;
   const [value, setValue] = useState(state?.title || '');
   const [title, setTitle] = useState(state?.description || '');
   const [cat, setCat] = useState(state?.cat || '');
-  const [image, setImage] = useState(state?.image || null);
 
   const navigate = useNavigate();
 
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    setFileToBase(file);
-    console.log(file);
-  };
+  const [imageURL, setImageURL] = useState(state?.image || null);
 
-  const setFileToBase = (file) => {
-    const reader = new FileReader();
-
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
+  const handleImageUpload = (url) => {
+    setImageURL(url);
   };
 
   const handleClick = async (e) => {
@@ -40,7 +31,7 @@ const Write = () => {
               title,
               description: value,
               cat,
-              image: image ? image : '',
+              image: imageURL, // Send the Cloudinary image URL
             },
             { withCredentials: true }
           )
@@ -50,7 +41,7 @@ const Write = () => {
               title,
               description: value,
               cat,
-              image: image ? image : '',
+              image: imageURL, // Send the Cloudinary image URL
               date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
             },
             { withCredentials: true }
@@ -61,17 +52,6 @@ const Write = () => {
     }
   };
 
-  // const upload = async () => {
-
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append('image', image);
-  //     const res = await upload.upload
-
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
   return (
     <div className='add'>
       <div className='content'>
@@ -100,15 +80,7 @@ const Write = () => {
             <b>Visibility:</b> Public
           </span>
           <div style={{ marginTop: '10px' }}>
-            <input
-              style={{ display: 'none' }}
-              type='file'
-              id='file'
-              onChange={handleImage}
-            />
-            <label className='file' htmlFor='file'>
-              Upload Image
-            </label>
+            <UploadWidget handleImageUpload={handleImageUpload} />
           </div>
           <div className='buttons'>
             <button>Save as a draft</button>
