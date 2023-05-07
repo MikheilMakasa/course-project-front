@@ -9,8 +9,8 @@ import UploadWidget from '../components/UploadWidget';
 
 const Write = () => {
   const state = useLocation().state;
-  const [value, setValue] = useState(state?.title || '');
-  const [title, setTitle] = useState(state?.description || '');
+  const [value, setValue] = useState(state?.description || '');
+  const [title, setTitle] = useState(state?.title || '');
   const [cat, setCat] = useState(state?.cat || '');
 
   const navigate = useNavigate();
@@ -23,8 +23,9 @@ const Write = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
     try {
-      const response = state
+      state
         ? await axios.put(
             `${api}/posts/${state.id}`,
             {
@@ -79,12 +80,22 @@ const Write = () => {
           <span>
             <b>Visibility:</b> Public
           </span>
-          <div style={{ marginTop: '10px' }}>
+          <div style={{ marginTop: '10px', display: 'flex' }}>
             <UploadWidget handleImageUpload={handleImageUpload} />
             {/* Render the image preview */}
-            {imageURL && (
-              <img src={imageURL} style={{ width: '25px' }} alt='Uploaded' />
-            )}
+            <div>
+              {imageURL && (
+                <img
+                  src={imageURL}
+                  style={{
+                    width: '25px',
+                    marginLeft: '10px',
+                    marginTop: '2px',
+                  }}
+                  alt='Uploaded'
+                />
+              )}
+            </div>
           </div>
           <div className='buttons'>
             <button>Save as a draft</button>
