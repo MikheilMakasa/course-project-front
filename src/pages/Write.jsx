@@ -24,7 +24,7 @@ const Write = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      state
+      const response = state
         ? await axios.put(
             `${api}/posts/${state.id}`,
             {
@@ -81,6 +81,10 @@ const Write = () => {
           </span>
           <div style={{ marginTop: '10px' }}>
             <UploadWidget handleImageUpload={handleImageUpload} />
+            {/* Render the image preview */}
+            {imageURL && (
+              <img src={imageURL} style={{ width: '25px' }} alt='Uploaded' />
+            )}
           </div>
           <div className='buttons'>
             <button>Save as a draft</button>
