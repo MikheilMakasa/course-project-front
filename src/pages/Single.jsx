@@ -76,7 +76,7 @@ const Single = () => {
           ) : null}
         </div>
         <h1>{post?.title}</h1>
-        <p>{getText(post?.description)}</p>
+        <p style={{ textAlign: 'justify' }}>{getText(post?.description)}</p>
       </div>
       <Menu cat={post.cat} currentPostId={postId} />
     </div>

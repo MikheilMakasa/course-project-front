@@ -43,6 +43,7 @@ const Home = () => {
               <Link className='link' to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
+
               <p>{getText(post.description).slice(0, 150)}...</p>
               <button onClick={() => navigate(`/post/${post.id}`)}>
                 Read More
@@ -50,6 +51,19 @@ const Home = () => {
             </div>
           </div>
         ))}
+        {posts.length === 0 && (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              margin: '0 auto',
+              textAlign: 'center',
+            }}
+          >
+            <h2>No posts available...</h2>
+            <p>Be the first one to write 😄</p>
+          </div>
+        )}
       </div>
     </div>
   );

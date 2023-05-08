@@ -32,28 +32,23 @@ const Navbar = () => {
           <Link className='link' to='/?cat=food'>
             <h5>FOOD</h5>
           </Link>
-          <span>{currentUser?.username}</span>
-          <div className='login'>
-            {currentUser ? (
-              <span onClick={logout}>Logout</span>
-            ) : (
-              <Link className='link-login' to='/login'>
-                <p
-                  style={{
-                    fontSize: '18px',
-                    fontWeight: '500',
-                  }}
-                >
-                  Login
-                </p>
-              </Link>
-            )}
-            <span className='write'>
-              <Link className='link-login' to='/write'>
-                Write a review
-              </Link>
+        </div>
+        <div className='login'>
+          <span className='user'>{currentUser?.username}</span>
+          {currentUser ? (
+            <span className='link-login' onClick={logout}>
+              Logout
             </span>
-          </div>
+          ) : (
+            <Link className='link-login' to='/login'>
+              <p>Login</p>
+            </Link>
+          )}
+          <span className='write'>
+            <Link className='link-login' to='/write'>
+              Write a review
+            </Link>
+          </span>
         </div>
       </div>
     </div>

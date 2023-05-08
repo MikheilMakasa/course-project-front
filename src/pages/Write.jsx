@@ -98,7 +98,6 @@ const Write = () => {
             </div>
           </div>
           <div className='buttons'>
-            <button>Save as a draft</button>
             <button onClick={handleClick}>Publish</button>
           </div>
         </div>

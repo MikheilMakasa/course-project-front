@@ -77,14 +77,19 @@ $darkBlue: #3c3cfd;
         padding: 10px 0;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 70px;
         border-bottom: 2px solid lightgray;
+
         .logo {
+          flex: 2;
           img {
             width: 120px;
           }
         }
         .links {
+          flex: 5;
           display: flex;
           align-items: center;
           gap: 18px;
@@ -96,29 +101,39 @@ $darkBlue: #3c3cfd;
           span {
             cursor: pointer;
           }
-          .login {
+        }
+        .login {
+          flex: 3;
+          display: flex;
+          flex-direction: row;
+          margin: 20px 0;
+          width: 100%;
+          max-width: 270px;
+          .user {
+            color: $blue;
+            font-size: 16px;
+            font-weight: 500;
+            align-items: center;
             display: flex;
-            flex-direction: row;
-            margin: 20px 0;
-            width: 100%;
-            max-width: 200px;
-            .link {
-              display: flex;
-              align-items: center;
-              margin-right: 10px;
-            }
+            margin: 0 5px;
+          }
 
-            .link-login {
-              display: flex;
-              align-items: center;
-              text-decoration: none;
-              color: inherit;
-            }
+          .login-logout {
+            font-size: 16px;
+            font-weight: 500;
+          }
+
+          .link-login {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
           }
 
           .write {
             background-color: $lightOrange;
-            width: 120px;
+            width: 2220px !important;
             height: 22px;
             border-radius: 8px;
             display: flex;
@@ -165,10 +180,11 @@ $darkBlue: #3c3cfd;
         margin-top: 50px;
         display: flex;
         flex-direction: column;
-        gap: 150px;
+        gap: 50px;
 
         .post {
           display: flex;
+          padding-bottom: 70px;
           gap: 100px;
 
           &:nth-child(2n + 1) {
@@ -206,8 +222,12 @@ $darkBlue: #3c3cfd;
             flex-direction: column;
             justify-content: space-between;
 
+            .link {
+              border-bottom: 2px solid $blue;
+            }
+
             h1 {
-              font-size: 48px;
+              font-size: 38px;
             }
 
             p {
@@ -244,7 +264,7 @@ $darkBlue: #3c3cfd;
 
       .content {
         flex: 5;
-        text-align: justify;
+
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -364,10 +384,8 @@ $darkBlue: #3c3cfd;
         }
 
         .editorContainer {
-          height: 300px;
-          max-width: 655px;
-
-          border: 1px solid lightgray;
+          height: 318px;
+          max-width: 730px;
         }
 
         .editor {
@@ -414,23 +432,14 @@ $darkBlue: #3c3cfd;
 
           .buttons {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+
             margin-top: 15px;
 
-            :first-child {
-              cursor: pointer;
-              color: white;
-              background-color: gray;
-              border: none;
-              padding: 10px 15px;
-              border-radius: 5px;
-              font-size: 15px;
-              transition: 0.3s all ease-in-out;
-              &:hover {
-                background-color: rgb(78, 78, 78);
-              }
-            }
-            :last-child {
+            button {
+              margin-left: auto;
+              margin-right: auto;
+              width: 100%;
               cursor: pointer;
               color: white;
               background-color: $blue;
@@ -467,6 +476,7 @@ $darkBlue: #3c3cfd;
       .navbar {
         .container {
           flex-direction: column;
+          gap: 10px;
 
           .logo {
             margin-bottom: 10px;
@@ -483,17 +493,25 @@ $darkBlue: #3c3cfd;
               margin: 10px;
               text-align: center;
             }
-            .login {
-              display: flex;
-              flex-direction: column;
-              margin-top: 0px;
+          }
+          .login {
+            display: flex;
+            flex-direction: column;
+            margin-top: 5px;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
 
-              .link-login {
-                display: flex;
-                margin: 5px auto;
-                text-decoration: none;
-                color: inherit;
-              }
+            .link-login {
+              display: flex;
+              font-weight: 500;
+              margin: 5px auto;
+              text-decoration: none;
+              color: inherit;
+            }
+            .write {
+              max-width: 130px;
             }
           }
         }
@@ -509,6 +527,7 @@ $darkBlue: #3c3cfd;
         }
       }
 
+      // HOME
       .home {
         .posts {
           gap: 50px;
@@ -518,7 +537,7 @@ $darkBlue: #3c3cfd;
             display: block;
             gap: 100px;
             padding-bottom: 30px;
-            border-bottom: 2px solid lightgray;
+            border-bottom: 3px dotted lightgray;
 
             .img {
               position: relative;
@@ -580,34 +599,42 @@ $darkBlue: #3c3cfd;
         }
       }
 
-      // // HOME
-      // .home {
-      //   .posts {
-      //     gap: 50px;
-      //   }
+      // WRITE
+      .add {
+        .content {
+          margin-bottom: 35px;
+          input {
+            font-size: 22px;
+          }
+        }
 
-      //   .post {
-      //     display: block;
+        .menu {
+          flex-direction: column-reverse;
+          .item {
+            font-size: 16px;
 
-      //     .img {
-      //       &::after {
-      //         top: -20px;
-      //         left: 20px;
-      //       }
-      //     }
+            h1 {
+              font-size: 25px;
+              margin-top: 5px;
+            }
+            .buttons {
+              button {
+                font-size: 18px;
+              }
+            }
 
-      //     .content {
-      //       h1 {
-      //         font-size: 36px;
-      //       }
+            .cat {
+              display: flex;
+              align-items: center;
+              gap: 2px;
+              font-size: 18px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
 
-      //       p {
-      //         font-size: 16px;
-      //       }
-      //     }
-      //   }
-      // }
-
+      // SINGLE
       .single {
         flex-direction: column;
 
