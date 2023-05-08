@@ -265,6 +265,11 @@ $darkBlue: #3c3cfd;
             flex-direction: column;
             justify-content: space-between;
 
+            .like {
+              color: $blue;
+              font-weight: 500;
+            }
+
             .link {
               border-bottom: 2px solid $blue;
             }

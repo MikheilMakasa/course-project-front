@@ -23,8 +23,11 @@ const Single = () => {
         const res = await axios.get(`${api}/posts/${postId}`);
 
         setPost(res.data);
-        setLiked(res.data.liked);
-        console.log(res.data);
+        const isPostLiked = Boolean(
+          res.data.likes.find((data) => data.likeUserId === currentUser.id)
+        );
+
+        setLiked(isPostLiked);
       } catch (error) {
         console.log(error);
       }
@@ -98,7 +101,7 @@ const Single = () => {
           ) : null}
           <div className='like'>
             <i
-              className={liked ? 'bi bi-heart-fill' : 'bi bi-heart'}
+              className={liked ? '"bi bi-star-fill' : '"bi bi-star'}
               style={{
                 color: liked ? 'red' : 'black',
                 fontSize: '20px',

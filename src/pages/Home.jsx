@@ -16,7 +16,6 @@ const Home = () => {
       try {
         const res = await axios.get(`${api}/posts${cat}`);
         setPosts(res.data);
-        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -49,9 +48,13 @@ const Home = () => {
               <p>{getText(post.description).slice(0, 150)}...</p>
 
               {post.likes_count ? (
-                <span>{post.likes_count} Likes</span>
+                <span className='like'>
+                  {post.likes_count} <i className='bi bi-star-fill'></i>
+                </span>
               ) : (
-                '0 Likes'
+                <span className='like'>
+                  0 <i className='bi bi-star-fill'></i>
+                </span>
               )}
               <br />
 
