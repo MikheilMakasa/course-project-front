@@ -34,6 +34,7 @@ const Single = () => {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
 
   const handleDelete = async () => {
