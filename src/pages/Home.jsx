@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { api } from '../constants';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -15,6 +16,7 @@ const Home = () => {
       try {
         const res = await axios.get(`${api}/posts${cat}`);
         setPosts(res.data);
+        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -45,6 +47,14 @@ const Home = () => {
               </Link>
 
               <p>{getText(post.description).slice(0, 150)}...</p>
+
+              {post.likes_count ? (
+                <span>{post.likes_count} Likes</span>
+              ) : (
+                '0 Likes'
+              )}
+              <br />
+
               <button onClick={() => navigate(`/post/${post.id}`)}>
                 Read More
               </button>

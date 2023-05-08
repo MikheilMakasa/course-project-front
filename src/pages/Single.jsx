@@ -9,6 +9,7 @@ import { AuthContext } from '../context/authContext';
 
 const Single = () => {
   const [post, setPost] = useState({});
+  const [liked, setLiked] = useState(false);
 
   const location = useLocation();
   const postId = location.pathname.split('/')[2];
@@ -22,6 +23,8 @@ const Single = () => {
         const res = await axios.get(`${api}/posts/${postId}`);
 
         setPost(res.data);
+        setLiked(res.data.liked);
+        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -39,11 +42,30 @@ const Single = () => {
     }
   };
 
+  const handleLike = async () => {
+    try {
+      await axios.post(
+        `${api}/posts/${postId}/like`,
+        {},
+        { withCredentials: true }
+      );
+
+      setLiked(!liked);
+
+      if (liked) {
+        setPost({ ...post, likes_count: post.likes_count - 1 });
+      } else {
+        setPost({ ...post, likes_count: post.likes_count + 1 });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent;
   };
-
   return (
     <div className='single'>
       <div className='content'>
@@ -74,6 +96,18 @@ const Single = () => {
               ></i>
             </div>
           ) : null}
+          <div className='like'>
+            <i
+              className={liked ? 'bi bi-heart-fill' : 'bi bi-heart'}
+              style={{
+                color: liked ? 'red' : 'black',
+                fontSize: '20px',
+                cursor: 'pointer',
+              }}
+              onClick={handleLike}
+            ></i>
+            <span>{post.likes_count} likes</span>
+          </div>
         </div>
         <h1>{post?.title}</h1>
         <p style={{ textAlign: 'justify' }}>{getText(post?.description)}</p>
