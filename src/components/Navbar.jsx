@@ -34,13 +34,23 @@ const Navbar = () => {
           </Link>
         </div>
         <div className='login'>
-          <span className='user'>{currentUser?.username}</span>
+          {currentUser?.username && (
+            <span className='user'>{currentUser?.username}</span>
+          )}
           {currentUser ? (
-            <span className='link-login' onClick={logout}>
+            <span
+              className='write'
+              style={{ fontSize: '16px' }}
+              onClick={logout}
+            >
               Logout
             </span>
           ) : (
-            <Link className='link-login' to='/login'>
+            <Link
+              className='write'
+              to='/login'
+              style={{ textDecoration: 'none' }}
+            >
               <p>Login</p>
             </Link>
           )}

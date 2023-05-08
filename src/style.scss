@@ -92,14 +92,45 @@ $darkBlue: #3c3cfd;
           flex: 5;
           display: flex;
           align-items: center;
+          justify-content: center;
+          text-align: center;
           gap: 18px;
 
           h5 {
             font-size: 16px;
             font-weight: 500;
+            margin-bottom: 5px;
+            margin-top: 5px;
           }
           span {
             cursor: pointer;
+          }
+
+          a {
+            position: relative;
+            color: #000;
+            text-decoration: none;
+          }
+
+          a:hover {
+            color: #000;
+          }
+
+          a::before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #000;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+          }
+
+          a:hover::before {
+            transform: scaleX(1);
           }
         }
         .login {
@@ -109,6 +140,7 @@ $darkBlue: #3c3cfd;
           margin: 20px 0;
           width: 100%;
           max-width: 270px;
+          gap: 5px;
           .user {
             color: $blue;
             font-size: 16px;
@@ -116,6 +148,11 @@ $darkBlue: #3c3cfd;
             align-items: center;
             display: flex;
             margin: 0 5px;
+            border-radius: 8px;
+            border: 1px solid $blue;
+            padding: 5px 10px;
+            background-color: $blue;
+            color: white;
           }
 
           .login-logout {
@@ -129,9 +166,12 @@ $darkBlue: #3c3cfd;
             text-decoration: none;
             color: inherit;
             font-weight: 500;
+            font-size: 16px;
+            cursor: pointer !important;
           }
 
           .write {
+            color: white;
             background-color: $lightOrange;
             width: 2220px !important;
             height: 22px;
@@ -140,15 +180,18 @@ $darkBlue: #3c3cfd;
             align-items: center;
             justify-content: center;
             padding: 10px;
+            padding-left: 0px;
+            padding-right: 0px;
+            font-size: 16px;
+            cursor: pointer;
             font-weight: 500;
-            margin-top: 5px;
-            margin-left: 10px;
+            display: flex;
+            text-align: center;
             border: 1px solid transparent;
             transition: 0.3s all ease-in-out;
 
             &:hover {
               color: $lightOrange;
-
               font-weight: 500;
               background-color: white;
               border: 1px solid lightgray;
@@ -493,6 +536,33 @@ $darkBlue: #3c3cfd;
               margin: 10px;
               text-align: center;
             }
+            a {
+              padding: 0px 5px;
+              position: relative;
+              color: #000;
+              text-decoration: none;
+            }
+
+            a:hover {
+              color: #000;
+            }
+
+            a::before {
+              content: '';
+              position: absolute;
+              display: block;
+              width: 100%;
+              height: 2px;
+              bottom: 0;
+              left: 0;
+              background-color: $lightOrange;
+              transform: scaleX(0);
+              transition: transform 0.3s ease;
+            }
+
+            a:hover::before {
+              transform: scaleX(1);
+            }
           }
           .login {
             display: flex;
@@ -509,9 +579,11 @@ $darkBlue: #3c3cfd;
               margin: 5px auto;
               text-decoration: none;
               color: inherit;
+              cursor: pointer !important;
             }
             .write {
               max-width: 130px;
+              margin-top: 5px;
             }
           }
         }
