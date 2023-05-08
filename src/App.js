@@ -6,8 +6,11 @@ import Single from './pages/Single';
 import Write from './pages/Write';
 import SharedLayout from './pages/SharedLayout';
 import './style.scss';
+import { AuthContext } from './context/authContext';
+import { useContext } from 'react';
 
 function App() {
+  const { currentUser } = useContext(AuthContext);
   return (
     <div className='app'>
       <div className='container'>
@@ -15,7 +18,7 @@ function App() {
           <Routes>
             <Route path='/' element={<SharedLayout />}>
               <Route index element={<Home />} />
-              <Route path='/write' element={<Write />} />
+              {currentUser && <Route path='/write' element={<Write />} />}
               <Route path='/post/:id' element={<Single />} />
             </Route>
             <Route path='/login' element={<Login />} />
