@@ -15,7 +15,7 @@ const Write = () => {
 
   const navigate = useNavigate();
 
-  const [imageURL, setImageURL] = useState(state?.image || null);
+  const [imageURL, setImageURL] = useState(state?.img || null);
 
   const handleImageUpload = (url) => {
     setImageURL(url);
