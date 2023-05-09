@@ -40,12 +40,7 @@ const Navbar = () => {
             <span className='user'>{currentUser?.username}</span>
           )}
           {currentUser ? (
-            <Button
-              variant='warning'
-              className='write'
-              style={{ fontSize: '16px' }}
-              onClick={logout}
-            >
+            <Button variant='warning' className='write' onClick={logout}>
               Logout
             </Button>
           ) : (

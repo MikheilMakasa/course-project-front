@@ -143,38 +143,23 @@ $darkBlue: #3c3cfd;
           gap: 5px;
           .user {
             color: $blue;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             align-items: center;
             display: flex;
-            margin: 0 5px;
+
             border-radius: 8px;
             border: 1px solid $blue;
-            padding: 5px 10px;
+            padding: 8px 5px;
             background-color: $blue;
             color: white;
-          }
-
-          .login-logout {
-            font-size: 16px;
-            font-weight: 500;
-          }
-
-          .link-login {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
-            font-weight: 500;
-            font-size: 16px;
-            cursor: pointer !important;
           }
 
           .write {
             color: white;
             background-color: $lightOrange;
             font-weight: 500;
-
+            font-size: 15px;
             border: 1px solid transparent;
             transition: 0.3s all ease-in-out;
 
@@ -211,12 +196,27 @@ $darkBlue: #3c3cfd;
         margin-top: 50px;
         display: flex;
         flex-direction: column;
-        gap: 50px;
+        gap: 60px;
 
         .post {
           display: flex;
           padding-bottom: 70px;
           gap: 100px;
+
+          position: relative;
+          &::after {
+            content: '';
+            width: 106%;
+            height: 110%;
+
+            position: absolute;
+            top: -20px;
+            left: -25px;
+            z-index: -2;
+            border-radius: 10px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+              rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+          }
 
           &:nth-child(2n + 1) {
             flex-direction: row-reverse;
@@ -241,6 +241,7 @@ $darkBlue: #3c3cfd;
               left: -20px;
               z-index: -1;
               border-radius: 10px;
+              box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             }
 
             img {
@@ -617,7 +618,21 @@ $darkBlue: #3c3cfd;
             display: block;
             gap: 100px;
             padding-bottom: 30px;
-            border-bottom: 3px dotted lightgray;
+
+            position: relative;
+            &::after {
+              content: '';
+              width: 102%;
+              height: 102%;
+
+              position: absolute;
+              top: -20px;
+              left: -20px;
+              z-index: -2;
+              border-radius: 10px;
+              box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+                rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            }
 
             .img {
               position: relative;
