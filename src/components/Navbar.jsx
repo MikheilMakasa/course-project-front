@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import logo from '../images/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
+import Button from 'react-bootstrap/Button';
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <div className='navbar'>
       <div className='container'>
@@ -38,28 +40,31 @@ const Navbar = () => {
             <span className='user'>{currentUser?.username}</span>
           )}
           {currentUser ? (
-            <span
+            <Button
+              variant='warning'
               className='write'
               style={{ fontSize: '16px' }}
               onClick={logout}
             >
               Logout
-            </span>
+            </Button>
           ) : (
-            <Link
+            <Button
+              variant='warning'
               className='write'
-              to='/login'
-              style={{ textDecoration: 'none' }}
+              onClick={() => navigate('/login')}
             >
-              <p>Login</p>
-            </Link>
+              Login
+            </Button>
           )}
           {currentUser?.username && (
-            <span className='write'>
-              <Link className='link-login' to='/write'>
-                Write a review
-              </Link>
-            </span>
+            <Button
+              variant='warning'
+              className='write'
+              onClick={() => navigate('/write')}
+            >
+              Write a review
+            </Button>
           )}
         </div>
       </div>

@@ -79,11 +79,11 @@ $darkBlue: #3c3cfd;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 70px;
+        gap: 20px;
         border-bottom: 2px solid lightgray;
 
         .logo {
-          flex: 2;
+          flex: 1;
           img {
             width: 120px;
           }
@@ -134,7 +134,7 @@ $darkBlue: #3c3cfd;
           }
         }
         .login {
-          flex: 3;
+          flex: 5;
           display: flex;
           flex-direction: row;
           margin: 20px 0;
@@ -173,26 +173,14 @@ $darkBlue: #3c3cfd;
           .write {
             color: white;
             background-color: $lightOrange;
-            width: 2220px !important;
-            height: 22px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            padding-left: 0px;
-            padding-right: 0px;
-            font-size: 16px;
-            cursor: pointer;
             font-weight: 500;
-            display: flex;
-            text-align: center;
+
             border: 1px solid transparent;
             transition: 0.3s all ease-in-out;
 
             &:hover {
               color: $lightOrange;
-              font-weight: 500;
+
               background-color: white;
               border: 1px solid lightgray;
             }
@@ -237,6 +225,10 @@ $darkBlue: #3c3cfd;
           .img {
             flex: 2;
             position: relative;
+            transition: 0.3s all ease-in-out;
+            &:hover {
+              scale: 1.01;
+            }
 
             // for background effect
             &::after {
@@ -600,10 +592,6 @@ $darkBlue: #3c3cfd;
               text-decoration: none;
               color: inherit;
               cursor: pointer !important;
-            }
-            .write {
-              max-width: 130px;
-              margin-top: 5px;
             }
           }
         }

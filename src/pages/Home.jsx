@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { api } from '../constants';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import moment from 'moment';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -30,6 +32,7 @@ const Home = () => {
   };
   return (
     <div className='home'>
+      <Spinner animation='border' variant='primary' />
       <div className='posts'>
         {posts?.map((post) => (
           <div key={post.id} className='post'>
@@ -61,6 +64,10 @@ const Home = () => {
               <button onClick={() => navigate(`/post/${post.id}`)}>
                 Read More
               </button>
+              <br />
+              <p style={{ fontSize: '14px', color: 'gray' }}>
+                Posted {moment(post.date).fromNow()}
+              </p>
             </div>
           </div>
         ))}
