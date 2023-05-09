@@ -100,18 +100,23 @@ const Single = () => {
               ></i>
             </div>
           ) : null}
-          <div className='like'>
-            <i
-              className={liked ? '"bi bi-star-fill' : '"bi bi-star'}
-              style={{
-                color: liked ? 'red' : 'black',
-                fontSize: '20px',
-                cursor: 'pointer',
-              }}
-              onClick={handleLike}
-            ></i>
-            <span>{post.likes_count} likes</span>
-          </div>
+          {currentUser?.username ? (
+            <div className='like'>
+              <span>
+                {post.likes_count}{' '}
+                <i
+                  className={liked ? '"bi bi-star-fill' : '"bi bi-star'}
+                  onClick={handleLike}
+                ></i>{' '}
+              </span>
+            </div>
+          ) : (
+            <div className='like'>
+              <span>
+                {post.likes_count} <i className='bi bi-star-fill'></i>
+              </span>
+            </div>
+          )}
         </div>
         <h1>{post?.title}</h1>
         <p style={{ textAlign: 'justify' }}>{getText(post?.description)}</p>

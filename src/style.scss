@@ -307,7 +307,7 @@ $darkBlue: #3c3cfd;
 
     .single {
       display: flex;
-      gap: 50px;
+      gap: 30px;
       margin-top: 10px;
 
       .content {
@@ -325,9 +325,11 @@ $darkBlue: #3c3cfd;
 
         .user {
           display: flex;
+          justify-content: space-between;
           align-items: center;
           gap: 10px;
           font-size: 14px;
+          border-bottom: 1px solid lightgray;
 
           img {
             width: 50px;
@@ -337,6 +339,7 @@ $darkBlue: #3c3cfd;
           }
 
           .info {
+            flex: 3;
             display: flex;
             flex-direction: column;
             padding-top: 10px;
@@ -347,11 +350,21 @@ $darkBlue: #3c3cfd;
               font-weight: bold;
             }
           }
-        }
-        .edit {
-          margin-left: 10px;
-          display: flex;
-          gap: 10px;
+          .edit {
+            margin-left: 10px;
+            display: flex;
+            gap: 10px;
+            flex: 5;
+          }
+          .like {
+            color: $blue;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+
+            margin-right: 5px;
+            font-weight: 500;
+          }
         }
       }
       h1 {
@@ -367,6 +380,8 @@ $darkBlue: #3c3cfd;
         display: flex;
         flex-direction: column;
         gap: 25px;
+        padding-left: 15px;
+        border-left: 1px solid lightgray;
 
         h1 {
           font-size: 20px;
