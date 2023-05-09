@@ -31,10 +31,10 @@ $darkBlue: #3c3cfd;
         font-size: 14px;
         display: flex;
         flex-direction: column;
-        padding: 50px;
+        padding: 30px 40px;
         background-color: white;
         border-radius: 10px;
-        width: 300px;
+
         gap: 20px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
@@ -42,6 +42,8 @@ $darkBlue: #3c3cfd;
           padding: 10px;
           border: none;
           border-bottom: 1px solid gray;
+          outline: none;
+          width: 300px;
         }
 
         button {
@@ -80,7 +82,10 @@ $darkBlue: #3c3cfd;
         justify-content: center;
         flex-wrap: wrap;
         gap: 20px;
-        border-bottom: 2px solid lightgray;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+          rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        padding: 5px;
+        border-radius: 5px;
 
         .logo {
           flex: 1;
@@ -226,6 +231,7 @@ $darkBlue: #3c3cfd;
             flex: 2;
             position: relative;
             transition: 0.3s all ease-in-out;
+
             &:hover {
               scale: 1.01;
             }
@@ -241,14 +247,16 @@ $darkBlue: #3c3cfd;
               left: -20px;
               z-index: -1;
               border-radius: 10px;
-              box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+              box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+                rgba(0, 0, 0, 0.22) 0px 15px 12px;
             }
 
             img {
               width: 100%;
               max-height: 400px;
-              object-fit: cover;
+
               border-radius: 10px;
+              border: 1px solid black;
             }
           }
 
@@ -434,9 +442,12 @@ $darkBlue: #3c3cfd;
 
         input {
           padding: 10px;
-          border: 1px solid lightgray;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
           border-radius: 5px;
+          border: none;
           font-size: 16px;
+          outline: none;
         }
 
         .editorContainer {
@@ -456,7 +467,8 @@ $darkBlue: #3c3cfd;
         gap: 20px;
 
         .item {
-          border: 1px solid lightgray;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
           padding: 10px;
           flex: 1;
           display: flex;
@@ -518,6 +530,14 @@ $darkBlue: #3c3cfd;
           }
         }
       }
+    }
+
+    .spinner {
+      color: $blue;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     // RESPONSIVE LAYOUT
@@ -645,6 +665,8 @@ $darkBlue: #3c3cfd;
                 background-color: $blue;
                 position: absolute;
                 top: 20px;
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+                  rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
                 z-index: -1;
                 border-radius: 10px;
@@ -658,13 +680,14 @@ $darkBlue: #3c3cfd;
                 max-height: 300px;
                 object-fit: cover;
                 border-radius: 10px;
+                border: 1px solid black;
               }
             }
 
             .content {
               max-width: 500px;
               h1 {
-                margin-top: 30px;
+                padding-top: 35px;
                 font-size: 32px;
               }
 

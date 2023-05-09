@@ -47,6 +47,7 @@ const Navbar = () => {
             <Button
               variant='warning'
               className='write'
+              style={{ width: '90%' }}
               onClick={() => navigate('/login')}
             >
               Login
