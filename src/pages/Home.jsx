@@ -29,6 +29,7 @@ const Home = () => {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cat]);
 
   const getText = (html) => {
