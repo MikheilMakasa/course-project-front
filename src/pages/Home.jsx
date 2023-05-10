@@ -90,6 +90,7 @@ const Home = () => {
                 flexDirection: 'column',
                 margin: '0 auto',
                 textAlign: 'center',
+                height: '50vh',
               }}
             >
               <h2>No posts available...</h2>

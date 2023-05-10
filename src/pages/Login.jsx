@@ -2,12 +2,14 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../context/authContext';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 const Login = () => {
   const [inputs, setInputs] = useState({
     username: '',
     password: '',
   });
+  const { loading, setLoading } = useContext(AuthContext);
 
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const Login = () => {
   // Focusing user on first input
   const nameRef = useRef();
   useEffect(() => {
-    nameRef.current.focus();
+    nameRef?.current.focus();
   }, []);
 
   // Setting input fields
@@ -33,6 +35,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       await login(inputs);
       navigate('/');
     } catch (error) {
@@ -40,47 +43,57 @@ const Login = () => {
       setError(error.response.data.error);
     }
     setInputs({ username: '', password: '' });
+    setLoading(false);
   };
 
   return (
     <div className='auth'>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          required
-          type='text'
-          placeholder='Username'
-          onChange={handleChange}
-          name='username'
-          value={inputs.username}
-          ref={nameRef}
-        />
-        <input
-          required
-          type='password'
-          placeholder='Password'
-          onChange={handleChange}
-          name='password'
-          value={inputs.password}
-        />
-        <button type='submit'>Login</button>
-        {error ? <p>{error}</p> : null}
-        <span>
-          Don't have an account? <Link to='/register'>Register</Link>
-        </span>
-        <Link className='link' to={'/'}>
-          <div
-            style={{
-              textAlign: 'center',
-              color: '#ffc961',
-              marginTop: '10px',
-              fontWeight: '500',
-            }}
-          >
-            Back to Home
-          </div>
-        </Link>
-      </form>
+      {loading && (
+        <div className='spinner'>
+          <Spinner animation='border' variant='primary' />
+        </div>
+      )}
+      {!loading && (
+        <>
+          <h1>Login</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              required
+              type='text'
+              placeholder='Username'
+              onChange={handleChange}
+              name='username'
+              value={inputs.username}
+              ref={nameRef}
+            />
+            <input
+              required
+              type='password'
+              placeholder='Password'
+              onChange={handleChange}
+              name='password'
+              value={inputs.password}
+            />
+            <button type='submit'>Login</button>
+            {error ? <p>{error}</p> : null}
+            <span>
+              Don't have an account? <Link to='/register'>Register</Link>
+            </span>
+            <Link className='link' to={'/'}>
+              <div
+                style={{
+                  textAlign: 'center',
+                  color: '#ffc961',
+                  marginTop: '10px',
+                  fontWeight: '500',
+                }}
+              >
+                Back to Home
+              </div>
+            </Link>
+          </form>
+        </>
+      )}
     </div>
   );
 };

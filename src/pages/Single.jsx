@@ -6,10 +6,12 @@ import axios from 'axios';
 import moment from 'moment';
 import { api } from '../constants';
 import { AuthContext } from '../context/authContext';
+import Spinner from 'react-bootstrap/esm/Spinner';
 
 const Single = () => {
   const [post, setPost] = useState({});
   const [liked, setLiked] = useState(false);
+  const { loading, setLoading } = useContext(AuthContext);
 
   const location = useLocation();
   const postId = location.pathname.split('/')[2];
@@ -20,6 +22,7 @@ const Single = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const res = await axios.get(`${api}/posts/${postId}`);
 
         setPost(res.data);
@@ -31,6 +34,7 @@ const Single = () => {
       } catch (error) {
         console.log(error);
       }
+      setLoading(false);
     };
 
     fetchData();
@@ -72,56 +76,69 @@ const Single = () => {
   };
   return (
     <div className='single'>
-      <div className='content'>
-        <img src={post?.img} alt='post' />
-        <div className='user'>
-          {post?.userImg && <img src={post?.userImg} alt='user' />}
-          <div className='info'>
-            <span>{post?.username}</span>
-            <p>Posted {moment(post.date).fromNow()}</p>
-          </div>
-          {currentUser?.username === post?.username ? (
-            <div className='edit'>
-              <Link to={`/write?edit=2`} state={post}>
-                <i
-                  className='bi bi-pencil-fill'
-                  style={{
-                    color: 'black',
-                    fontSize: '20px',
-                    cursor: 'pointer',
-                  }}
-                ></i>
-              </Link>
-
-              <i
-                className='bi bi-trash-fill'
-                style={{ color: 'black', fontSize: '20px', cursor: 'pointer' }}
-                onClick={handleDelete}
-              ></i>
-            </div>
-          ) : null}
-          {currentUser?.username ? (
-            <div className='like'>
-              <span>
-                {post.likes_count}{' '}
-                <i
-                  className={liked ? '"bi bi-star-fill' : '"bi bi-star'}
-                  onClick={handleLike}
-                ></i>{' '}
-              </span>
-            </div>
-          ) : (
-            <div className='like'>
-              <span>
-                {post.likes_count} <i className='bi bi-star-fill'></i>
-              </span>
-            </div>
-          )}
+      {loading && (
+        <div className='spinner'>
+          <Spinner animation='border' variant='primary' />
         </div>
-        <h1>{post?.title}</h1>
-        <p style={{ textAlign: 'justify' }}>{getText(post?.description)}</p>
-      </div>
-      <Menu cat={post.cat} currentPostId={postId} />
+      )}
+      {!loading && (
+        <>
+          <div className='content'>
+            <img src={post?.img} alt='post' />
+            <div className='user'>
+              {post?.userImg && <img src={post?.userImg} alt='user' />}
+              <div className='info'>
+                <span>{post?.username}</span>
+                <p>Posted {moment(post.date).fromNow()}</p>
+              </div>
+              {currentUser?.username === post?.username ? (
+                <div className='edit'>
+                  <Link to={`/write?edit=2`} state={post}>
+                    <i
+                      className='bi bi-pencil-fill'
+                      style={{
+                        color: 'black',
+                        fontSize: '20px',
+                        cursor: 'pointer',
+                      }}
+                    ></i>
+                  </Link>
+
+                  <i
+                    className='bi bi-trash-fill'
+                    style={{
+                      color: 'black',
+                      fontSize: '20px',
+                      cursor: 'pointer',
+                    }}
+                    onClick={handleDelete}
+                  ></i>
+                </div>
+              ) : null}
+              {currentUser?.username ? (
+                <div className='like'>
+                  <span>
+                    {post.likes_count}{' '}
+                    <i
+                      className={liked ? '"bi bi-star-fill' : '"bi bi-star'}
+                      onClick={handleLike}
+                    ></i>{' '}
+                  </span>
+                </div>
+              ) : (
+                <div className='like'>
+                  <span>
+                    {post.likes_count} <i className='bi bi-star-fill'></i>
+                  </span>
+                </div>
+              )}
+            </div>
+            <h1>{post?.title}</h1>
+            <p style={{ textAlign: 'justify' }}>{getText(post?.description)}</p>
+          </div>
+          <Menu cat={post.cat} currentPostId={postId} />
+        </>
+      )}
     </div>
   );
 };
