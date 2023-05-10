@@ -8,12 +8,13 @@ import moment from 'moment';
 import UploadWidget from '../components/UploadWidget';
 import { AuthContext } from '../context/authContext';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import { toast } from 'react-toastify';
 
 const Write = () => {
   const state = useLocation().state;
   const [value, setValue] = useState(state?.description || '');
   const [title, setTitle] = useState(state?.title || '');
-  const [cat, setCat] = useState(state?.cat || '');
+  const [cat, setCat] = useState(state?.cat || 'art');
   const { loading, setLoading } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -52,8 +53,9 @@ const Write = () => {
             { withCredentials: true }
           );
       navigate('/');
+      toast.success('Posted successfully');
     } catch (error) {
-      console.log(error);
+      toast.error('Fill in all the Fields');
     }
     setLoading(false);
   };
@@ -92,22 +94,34 @@ const Write = () => {
               <span>
                 <b>Visibility:</b> Public
               </span>
-              <div style={{ marginTop: '10px', display: 'flex' }}>
+              <div
+                style={{
+                  marginTop: '10px',
+                  display: 'flex',
+                  gap: '10px',
+                  alignItems: 'center',
+                }}
+              >
                 <UploadWidget handleImageUpload={handleImageUpload} />
                 {/* Render the image preview */}
-                <div>
-                  {imageURL && (
+
+                {imageURL && (
+                  <div>
                     <img
-                      src={imageURL}
                       style={{
-                        width: '25px',
-                        marginLeft: '10px',
-                        marginTop: '2px',
+                        height: '30px',
+                        borderRadius: '5px',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                       }}
+                      src={imageURL}
                       alt='Uploaded'
                     />
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
               <div className='buttons'>
                 <button onClick={handleClick}>Publish</button>

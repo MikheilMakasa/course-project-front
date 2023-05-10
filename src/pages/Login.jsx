@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../context/authContext';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -38,6 +39,7 @@ const Login = () => {
       setLoading(true);
       await login(inputs);
       navigate('/');
+      toast.success('Logged in successfully');
     } catch (error) {
       console.log(error);
       setError(error.response.data.error);

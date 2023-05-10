@@ -4,6 +4,7 @@ import axios from 'axios';
 import { api } from '../constants';
 import { AuthContext } from '../context/authContext';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -39,6 +40,7 @@ const Register = () => {
       setLoading(true);
       await axios.post(`${api}/auth/register`, inputs);
       navigate('/login');
+      toast.success('User registered successfully');
     } catch (error) {
       setError(error.response.data.error);
     }
@@ -87,6 +89,18 @@ const Register = () => {
             <span>
               Already have an account? <Link to='/login'>Login</Link>
             </span>
+            <Link className='link' to={'/'}>
+              <div
+                style={{
+                  textAlign: 'center',
+                  color: '#ffc961',
+                  marginTop: '10px',
+                  fontWeight: '500',
+                }}
+              >
+                Back to Home
+              </div>
+            </Link>
           </form>
         </>
       )}

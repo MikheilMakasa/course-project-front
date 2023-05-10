@@ -7,6 +7,7 @@ import moment from 'moment';
 import { api } from '../constants';
 import { AuthContext } from '../context/authContext';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import { toast } from 'react-toastify';
 
 const Single = () => {
   const [post, setPost] = useState({});
@@ -45,6 +46,7 @@ const Single = () => {
     try {
       await axios.delete(`${api}/posts/${postId}`, { withCredentials: true });
       navigate('/');
+      toast.success('Post deleted successfully');
     } catch (error) {
       console.log(error);
     }

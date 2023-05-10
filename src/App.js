@@ -8,6 +8,8 @@ import SharedLayout from './pages/SharedLayout';
 import './style.scss';
 import { AuthContext } from './context/authContext';
 import { useContext } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -15,6 +17,13 @@ function App() {
     <div className='app'>
       <div className='container'>
         <BrowserRouter>
+          <ToastContainer
+            theme='light'
+            position='top-right'
+            autoClose={2200}
+            closeOnClick
+            pauseOnHover={false}
+          />
           <Routes>
             <Route path='/' element={<SharedLayout />}>
               <Route index element={<Home />} />
