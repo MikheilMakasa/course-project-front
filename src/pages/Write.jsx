@@ -55,7 +55,7 @@ const Write = () => {
       navigate('/');
       toast.success('Posted successfully');
     } catch (error) {
-      toast.error(error);
+      toast.error(error.err);
     }
     setLoading(false);
   };
