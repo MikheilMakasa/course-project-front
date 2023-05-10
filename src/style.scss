@@ -441,11 +441,12 @@ $darkBlue: #3c3cfd;
         gap: 20px;
 
         input {
-          padding: 10px;
+          padding: 10px 20px;
           box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
             rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
           border-radius: 5px;
           border: none;
+
           font-size: 16px;
           outline: none;
         }
@@ -639,7 +640,6 @@ $darkBlue: #3c3cfd;
 
           .post {
             display: block;
-            gap: 100px;
             padding-bottom: 30px;
 
             position: relative;
@@ -647,7 +647,6 @@ $darkBlue: #3c3cfd;
               content: '';
               width: 102%;
               height: 102%;
-
               position: absolute;
               top: -20px;
               left: -20px;
@@ -688,32 +687,22 @@ $darkBlue: #3c3cfd;
             }
 
             .content {
-              max-width: 500px;
+              padding: 15px;
               h1 {
-                padding-top: 35px;
-                font-size: 32px;
+                padding: 25px 15px;
+                font-size: 24px;
               }
 
               p {
                 text-align: justify;
                 font-size: 18px;
+                padding: 0 20px;
+              }
+              .like {
+                margin-left: 20px;
               }
               button {
-                font-size: 15px;
-                width: max-content;
-                padding: 10px 20px;
-                border: none;
-                cursor: pointer;
-                background-color: transparent;
-                border: 1px solid $lightOrange;
-                color: $lightOrange;
-                border-radius: 5px;
-                transition: 0.3s all ease-in-out;
-
-                &:hover {
-                  background-color: $lightOrange;
-                  color: white;
-                }
+                margin-left: 20px;
               }
             }
           }
@@ -765,6 +754,113 @@ $darkBlue: #3c3cfd;
           }
         }
 
+        .menu {
+          gap: 15px;
+        }
+      }
+
+      .add {
+        flex-direction: column;
+
+        .content {
+          .editorContainer {
+            max-width: 100%;
+          }
+        }
+
+        .menu {
+          gap: 15px;
+
+          .item {
+            padding-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    // RESPONSIVE LAYOUT
+    @media (max-width: 480px) {
+      /* Styles for smaller screens */
+
+      // AUTH
+      .auth {
+        display: flex;
+
+        form {
+          input {
+            width: 250px;
+          }
+        }
+      }
+
+      // HOME
+      .home {
+        .posts {
+          gap: 50px;
+          margin-right: 0;
+
+          .post {
+            display: block;
+            padding-bottom: 10px;
+
+            position: relative;
+            &::after {
+              content: '';
+              width: 105%;
+              height: 102%;
+            }
+          }
+        }
+      }
+
+      // WRITE
+      .add {
+        .content {
+          margin-bottom: 35px;
+          input {
+            font-size: 22px;
+          }
+        }
+
+        .menu {
+          flex-direction: column-reverse;
+          .item {
+            font-size: 16px;
+
+            h1 {
+              font-size: 25px;
+              margin-top: 5px;
+            }
+            .buttons {
+              button {
+                font-size: 18px;
+              }
+            }
+
+            .cat {
+              display: flex;
+              align-items: center;
+              gap: 2px;
+              font-size: 18px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      // SINGLE
+      .single {
+        flex-direction: column;
+
+        .content {
+          img {
+            max-height: 300px;
+          }
+        }
+
+        h1 {
+          font-size: 24px;
+        }
         .menu {
           gap: 15px;
         }

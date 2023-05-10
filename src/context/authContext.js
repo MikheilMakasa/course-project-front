@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
 import { api } from '../constants';
+import { toast } from 'react-toastify';
 
 export const AuthContext = createContext();
 
@@ -20,6 +21,7 @@ export const AuthContextProvider = ({ children }) => {
   const logout = async () => {
     await axios.post(`${api}/auth/logout`);
     setCurrentUser(null);
+    toast.success('Logged out successfully');
   };
 
   useEffect(() => {
