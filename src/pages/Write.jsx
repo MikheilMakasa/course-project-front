@@ -55,7 +55,7 @@ const Write = () => {
       navigate('/');
       toast.success('Posted successfully');
     } catch (error) {
-      toast.error('Fill in all the Fields');
+      toast.error(error);
     }
     setLoading(false);
   };
