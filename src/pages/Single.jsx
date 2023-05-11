@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Menu from '../components/Menu';
 import axios from 'axios';
-import moment from 'moment';
+import moment from 'moment/moment';
 import { api } from '../constants';
 import { AuthContext } from '../context/authContext';
 import Spinner from 'react-bootstrap/esm/Spinner';

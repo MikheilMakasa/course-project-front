@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { api } from '../constants';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import moment from 'moment';
+import moment from 'moment/moment';
 import Spinner from 'react-bootstrap/esm/Spinner';
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
