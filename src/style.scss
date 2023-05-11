@@ -568,7 +568,8 @@ $darkBlue: #3c3cfd;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 0px;
             .link {
-              border: 1px solid $lightOrange;
+              box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+                rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
               border-radius: 5px;
               margin: 10px;
               text-align: center;
@@ -793,6 +794,41 @@ $darkBlue: #3c3cfd;
         }
       }
 
+      .navbar {
+        .container {
+          flex-direction: column;
+          gap: 10px;
+
+          .logo {
+            margin-bottom: 10px;
+          }
+
+          .links {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+          }
+          .login {
+            display: flex;
+            flex-direction: column;
+            margin-top: 5px;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+
+            .link-login {
+              display: flex;
+              font-weight: 500;
+              margin: 5px auto;
+              text-decoration: none;
+              color: inherit;
+              cursor: pointer !important;
+            }
+          }
+        }
+      }
+
       // HOME
       .home {
         .posts {
@@ -808,6 +844,21 @@ $darkBlue: #3c3cfd;
               content: '';
               width: 105%;
               height: 102%;
+            }
+
+            .img {
+              position: relative;
+
+              img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 325px;
+                max-height: 200px;
+                object-fit: cover;
+                border-radius: 10px;
+                border: 1px solid black;
+              }
             }
           }
         }
