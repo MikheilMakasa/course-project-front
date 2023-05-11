@@ -4,7 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { api } from '../constants';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import moment from 'moment/moment';
+import moment from 'moment';
+import 'moment-timezone';
 import Spinner from 'react-bootstrap/esm/Spinner';
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
@@ -15,6 +16,7 @@ const Home = () => {
   const { loading, setLoading } = useContext(AuthContext);
 
   const cat = useLocation().search;
+  const timezone = 'Asia/Tbilisi';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +80,7 @@ const Home = () => {
                 </button>
                 <br />
                 <p style={{ fontSize: '14px', color: 'gray' }}>
-                  Posted {moment(post.date).fromNow()}
+                  Posted {moment(post.date).tz(timezone).fromNow()}
                 </p>
               </div>
             </div>

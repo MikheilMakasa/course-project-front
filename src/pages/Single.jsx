@@ -3,7 +3,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Menu from '../components/Menu';
 import axios from 'axios';
-import moment from 'moment/moment';
+import moment from 'moment';
+import 'moment-timezone';
 import { api } from '../constants';
 import { AuthContext } from '../context/authContext';
 import Spinner from 'react-bootstrap/esm/Spinner';
@@ -14,6 +15,7 @@ const Single = () => {
   const [liked, setLiked] = useState(false);
   const { loading, setLoading } = useContext(AuthContext);
 
+  const timezone = 'Asia/Tbilisi';
   const location = useLocation();
   const postId = location.pathname.split('/')[2];
   const navigate = useNavigate();
@@ -34,7 +36,8 @@ const Single = () => {
 
         setPost(res.data);
         const isPostLiked = Boolean(
-          res.data.likes.find((data) => data.likeUserId === currentUser.id)
+          currentUser &&
+            res.data.likes.find((data) => data.likeUserId === currentUser.id)
         );
 
         setLiked(isPostLiked);
@@ -108,7 +111,9 @@ const Single = () => {
               {post?.userImg && <img src={post?.userImg} alt='user' />}
               <div className='info'>
                 <span>{post?.username}</span>
-                <p>Posted {moment(post.date).fromNow()}</p>
+                <p>
+                  Posted {moment(post.date).tz(timezone).format('DD MMMM YYYY')}
+                </p>
               </div>
               {currentUser?.username === post?.username ? (
                 <div className='edit'>
