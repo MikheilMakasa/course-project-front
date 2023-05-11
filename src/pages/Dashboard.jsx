@@ -18,7 +18,6 @@ function Dashboard() {
       headers: { Authorization: `Bearer ${token}` },
     });
     setUsers(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {

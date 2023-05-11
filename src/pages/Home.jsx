@@ -65,11 +65,7 @@ const Home = () => {
               onChange={handleSearch}
             />
           </div>
-          {filteredPosts.length === 0 && (
-            <div className='no-posts'>
-              <h2>No matching posts found...</h2>
-            </div>
-          )}
+
           {filteredPosts.map((post) => (
             <div key={post.id} className='post'>
               <div

@@ -23,6 +23,11 @@ const Register = () => {
     nameRef.current.focus();
   }, []);
 
+  // Regular expressions for validation
+  const nameRegex = /^.{5,}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^.{5,}$/;
+
   // Setting input fields
   const handleChange = (e) => {
     setInputs((prev) => ({
@@ -35,6 +40,25 @@ const Register = () => {
   // Submitting form
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { username, email, password } = inputs;
+
+    if (!nameRegex.test(username)) {
+      setError('Please enter a valid username.');
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    if (!passwordRegex.test(password)) {
+      setError(
+        'Please enter a valid password. Password must contain at least 8 characters, including a letter and a number.'
+      );
+      return;
+    }
 
     try {
       setLoading(true);
@@ -85,7 +109,7 @@ const Register = () => {
               value={inputs.password}
             />
             <button type='submit'>Register</button>
-            {error ? <p>{error}</p> : null}
+            {error ? <p style={{ maxWidth: '300px' }}>{error}</p> : null}
             <span>
               Already have an account? <Link to='/login'>Login</Link>
             </span>
