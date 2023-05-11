@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
 import { Table, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import jwt_decode from 'jwt-decode';
 import { api } from '../constants';
+import { AuthContext } from '../context/authContext';
 
 function Dashboard() {
   const [users, setUsers] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
-
-  const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
 
   const getData = async () => {
     const token = localStorage.getItem('token');
@@ -48,52 +47,53 @@ function Dashboard() {
     return decoded.email;
   };
 
-  const handleBlock = async () => {
+  const makeAdmin = async () => {
     const email = getMail();
+    const token = localStorage.getItem('token');
     try {
       await axios.post(
-        `${api}/users/blockUser`,
+        `${api}/users/makeAdmin`,
         { emailList: selectedRows },
         {
-          headers: { Authorization: localStorage.getItem('token') },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       if (selectedRows.includes(email)) {
-        handleLogout();
+        logout();
       }
-
       setSelectedRows([]);
       setSelectAll(false);
       getData();
-      toast.success('User(s) have been blocked');
+      toast.success('User(s) have been made admin');
     } catch (error) {
-      toast.error('something went wrong');
+      toast.error('Something went wrong');
     }
   };
 
-  const handleUnblock = async () => {
+  const unmakeAdmin = async () => {
+    const token = localStorage.getItem('token');
     try {
       await axios.post(
-        `${api}/users/unblockUser`,
+        `${api}/users/unmakeAdmin`,
         { emailList: selectedRows },
         {
-          headers: { Authorization: localStorage.getItem('token') },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
       setSelectedRows([]);
       setSelectAll(false);
       getData();
-      toast.success('User(s) have been unblocked');
+      toast.success('User(s) have been unmade from admin');
     } catch (error) {
-      toast.error('something went wrong');
+      toast.error('Something went wrong');
     }
   };
 
   const handleDelete = async () => {
     const email = getMail();
     try {
-      await axios.post(
+      await axios.delete(
         `${api}/users/deleteUser`,
         { emailList: selectedRows },
         {
@@ -102,53 +102,44 @@ function Dashboard() {
       );
 
       if (selectedRows.includes(email)) {
-        handleLogout();
+        logout();
       }
       setSelectedRows([]);
       setSelectAll(false);
       getData();
       toast.success('User(s) have been deleted');
     } catch (error) {
-      toast.error('something went wrong');
+      toast.error('Something went wrong');
     }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
-    toast.success('logged out');
   };
 
   return (
     <div className='dashboard'>
-      <div className='logout'>
-        <Button variant='primary' onClick={handleLogout}>
-          Logout
-        </Button>
-      </div>
       <h1 className='title'>Dashboard</h1>
       <div className='toolbar'>
         <Button
           variant='warning'
-          onClick={handleBlock}
+          onClick={makeAdmin}
           disabled={!selectedRows.length > 0}
-          style={{ color: 'white' }}
+          style={{ color: 'white', margin: '5px' }}
         >
-          Block
+          Make admin
         </Button>
         <Button
           variant='success'
-          onClick={handleUnblock}
+          onClick={unmakeAdmin}
           disabled={!selectedRows.length > 0}
+          style={{ color: 'white', margin: '5px' }}
         >
-          Unblock
+          Unmake admin
         </Button>
         <Button
           variant='danger'
           onClick={handleDelete}
           disabled={!selectedRows.length > 0}
+          style={{ color: 'white', margin: '5px' }}
         >
-          Delete
+          Delete user
         </Button>
       </div>
       <Table striped bordered hover className='table'>
