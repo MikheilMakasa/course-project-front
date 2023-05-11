@@ -93,7 +93,7 @@ function Dashboard() {
   const handleDelete = async () => {
     const email = getMail();
     try {
-      await axios.delete(
+      await axios.post(
         `${api}/users/deleteUser`,
         { emailList: selectedRows },
         {
