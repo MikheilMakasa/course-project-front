@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Table, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
-import moment from 'moment';
 import { toast } from 'react-toastify';
 import jwt_decode from 'jwt-decode';
 import { api } from '../constants';
