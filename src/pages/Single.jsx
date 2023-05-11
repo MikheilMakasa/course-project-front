@@ -122,7 +122,7 @@ const Single = () => {
                   <span>
                     {post.likes_count}{' '}
                     <i
-                      className={liked ? '"bi bi-star-fill' : '"bi bi-star'}
+                      className={liked ? 'bi bi-star-fill' : 'bi bi-star'}
                       onClick={handleLike}
                     ></i>{' '}
                   </span>
