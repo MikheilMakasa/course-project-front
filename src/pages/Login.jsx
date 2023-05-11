@@ -41,8 +41,7 @@ const Login = () => {
       navigate('/');
       toast.success('Logged in successfully');
     } catch (error) {
-      console.log(error);
-      setError(error.response.data.error);
+      setError('Failed to login. Please check your credentials.');
     }
     setInputs({ username: '', password: '' });
     setLoading(false);

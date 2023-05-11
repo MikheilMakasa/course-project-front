@@ -12,14 +12,17 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const login = async (inputs) => {
+    setLoading(true);
     const res = await axios.post(`${api}/auth/login`, inputs, {
-      withCredentials: 'true',
+      withCredentials: true,
     });
-    setCurrentUser(res.data);
+    localStorage.setItem('token', res.data.token);
+    setCurrentUser(res.data.user);
+    setLoading(false);
   };
 
-  const logout = async () => {
-    await axios.post(`${api}/auth/logout`);
+  const logout = () => {
+    localStorage.removeItem('token');
     setCurrentUser(null);
     toast.success('Logged out successfully');
   };

@@ -24,7 +24,13 @@ const Single = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${api}/posts/${postId}`);
+        const token = localStorage.getItem('token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const res = await axios.get(`${api}/posts/${postId}`, config);
 
         setPost(res.data);
         const isPostLiked = Boolean(
@@ -44,7 +50,14 @@ const Single = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${api}/posts/${postId}`, { withCredentials: true });
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      await axios.delete(`${api}/posts/${postId}`, config);
       navigate('/');
       toast.success('Post deleted successfully');
     } catch (error) {
@@ -54,11 +67,14 @@ const Single = () => {
 
   const handleLike = async () => {
     try {
-      await axios.post(
-        `${api}/posts/${postId}/like`,
-        {},
-        { withCredentials: true }
-      );
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      await axios.post(`${api}/posts/${postId}/like`, {}, config);
 
       setLiked(!liked);
 
@@ -76,6 +92,7 @@ const Single = () => {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent;
   };
+
   return (
     <div className='single'>
       {loading && (

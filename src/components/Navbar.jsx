@@ -7,6 +7,11 @@ import Button from 'react-bootstrap/Button';
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
   return (
     <div className='navbar'>
       <div className='container'>
@@ -40,7 +45,7 @@ const Navbar = () => {
             <span className='user'>{currentUser?.username}</span>
           )}
           {currentUser ? (
-            <Button variant='warning' className='write' onClick={logout}>
+            <Button variant='warning' className='write' onClick={handleLogout}>
               Logout
             </Button>
           ) : (

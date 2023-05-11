@@ -24,40 +24,40 @@ const Write = () => {
   const handleImageUpload = (url) => {
     setImageURL(url);
   };
-
   const handleClick = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      state
-        ? await axios.put(
-            `${api}/posts/${state.id}`,
-            {
-              title,
-              description: value,
-              cat,
-              image: imageURL, // Send the Cloudinary image URL
-            },
-            { withCredentials: true }
-          )
-        : await axios.post(
-            `${api}/posts/`,
-            {
-              title,
-              description: value,
-              cat,
-              image: imageURL, // Send the Cloudinary image URL
-              date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
-            },
-            { withCredentials: true }
-          );
+      const token = localStorage.getItem('token');
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const postData = {
+        title,
+        description: value,
+        cat,
+        image: imageURL,
+        date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+      };
+
+      if (state) {
+        await axios.put(`${api}/posts/${state.id}`, postData, config);
+      } else {
+        await axios.post(`${api}/posts/`, postData, config);
+      }
+
       navigate('/');
       toast.success('Posted successfully');
     } catch (error) {
       toast.error(error.message);
       console.log(error.message);
     }
+
     setLoading(false);
   };
 
