@@ -81,7 +81,7 @@ const Home = () => {
                 </Link>
                 <br />
 
-                <p>{getText(post.description).slice(0, 150)}...</p>
+                <p>{getText(post.description).slice(0, 250)}...</p>
 
                 {post.likes_count ? (
                   <span className='like'>
