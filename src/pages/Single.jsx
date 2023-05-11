@@ -112,7 +112,8 @@ const Single = () => {
               <div className='info'>
                 <span>{post?.username}</span>
                 <p>
-                  Posted {moment(post.date).tz(timezone).format('DD MMMM YYYY')}
+                  Posted:{' '}
+                  {moment(post?.date).tz(timezone).format('DD MMMM YYYY')}
                 </p>
               </div>
               {currentUser?.username === post?.username ? (
@@ -157,6 +158,7 @@ const Single = () => {
                 </div>
               )}
             </div>
+            <p>Tag: {post.cat.toUpperCase()} </p>
             <h1>{post?.title}</h1>
             <p style={{ textAlign: 'justify' }}>{getText(post?.description)}</p>
           </div>

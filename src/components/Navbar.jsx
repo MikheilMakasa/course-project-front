@@ -27,11 +27,11 @@ const Navbar = () => {
           <Link className='link' to='/?cat=science'>
             <h5>SCIENCE</h5>
           </Link>
-          <Link className='link' to='/?cat=technology'>
-            <h5>TECHNOLOGY</h5>
+          <Link className='link' to='/?cat=games'>
+            <h5>GAMES</h5>
           </Link>
-          <Link className='link' to='/?cat=cinema'>
-            <h5>CINEMA</h5>
+          <Link className='link' to='/?cat=movies'>
+            <h5>MOVIES</h5>
           </Link>
           <Link className='link' to='/?cat=design'>
             <h5>DESIGN</h5>

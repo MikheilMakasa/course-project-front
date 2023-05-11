@@ -79,9 +79,17 @@ const Home = () => {
                   Read More
                 </button>
                 <br />
-                <p style={{ fontSize: '14px', color: 'gray' }}>
-                  Posted {moment(post.date).tz(timezone).fromNow()}
-                </p>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                  <p style={{ fontSize: '14px', color: 'gray' }}>
+                    Posted:{' '}
+                    {moment(post.date).tz(timezone).format('DD MMMM YYYY')}
+                  </p>
+                  <p style={{ fontSize: '16px', color: 'gray' }}>
+                    Tag: {post.cat.toUpperCase()}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
