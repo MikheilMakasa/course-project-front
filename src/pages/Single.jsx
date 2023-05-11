@@ -158,7 +158,7 @@ const Single = () => {
                 </div>
               )}
             </div>
-            <p>Tag: {post.cat.toUpperCase()} </p>
+            <p>Tag: {post?.cat?.toUpperCase()} </p>
             <h1>{post?.title}</h1>
             <p style={{ textAlign: 'justify' }}>{getText(post?.description)}</p>
           </div>

@@ -12,6 +12,7 @@ import { AuthContext } from '../context/authContext';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { loading, setLoading } = useContext(AuthContext);
 
@@ -34,10 +35,19 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cat]);
 
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent;
   };
+
   return (
     <div className='home'>
       {loading && (
@@ -47,7 +57,20 @@ const Home = () => {
       )}
       {!loading && (
         <div className='posts'>
-          {posts?.map((post) => (
+          <div className='search'>
+            <input
+              type='text'
+              placeholder='Search by title...'
+              value={searchQuery}
+              onChange={handleSearch}
+            />
+          </div>
+          {filteredPosts.length === 0 && (
+            <div className='no-posts'>
+              <h2>No matching posts found...</h2>
+            </div>
+          )}
+          {filteredPosts.map((post) => (
             <div key={post.id} className='post'>
               <div
                 className='img'
