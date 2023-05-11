@@ -144,7 +144,8 @@ $darkBlue: #3c3cfd;
           flex-direction: row;
           margin: 20px 0;
           width: 100%;
-          max-width: 270px;
+          justify-content: center;
+
           gap: 5px;
           .user {
             color: $blue;
@@ -155,7 +156,7 @@ $darkBlue: #3c3cfd;
 
             border-radius: 8px;
             border: 1px solid $blue;
-            padding: 8px 5px;
+            padding: 4px 5px;
             background-color: $blue;
             color: white;
           }
@@ -165,6 +166,7 @@ $darkBlue: #3c3cfd;
             background-color: $lightOrange;
             font-weight: 500;
             font-size: 15px;
+            max-width: 300px;
             border: 1px solid transparent;
             transition: 0.3s all ease-in-out;
 
@@ -606,6 +608,7 @@ $darkBlue: #3c3cfd;
             display: flex;
             flex-direction: column;
             margin-top: 5px;
+            flex-direction: row;
             justify-content: center;
             align-items: center;
             margin-left: auto;
@@ -798,6 +801,8 @@ $darkBlue: #3c3cfd;
         .container {
           flex-direction: column;
           gap: 10px;
+          min-width: 320px;
+          margin-left: 50px;
 
           .logo {
             margin-bottom: 10px;
@@ -811,6 +816,8 @@ $darkBlue: #3c3cfd;
           .login {
             display: flex;
             flex-direction: column;
+            flex-direction: row;
+            flex-wrap: wrap;
             margin-top: 5px;
             justify-content: center;
             align-items: center;

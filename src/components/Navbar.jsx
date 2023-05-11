@@ -67,6 +67,15 @@ const Navbar = () => {
               Write a review
             </Button>
           )}
+          {currentUser?.isAdmin === 'true' && (
+            <Button
+              variant='warning'
+              className='write'
+              onClick={() => navigate('/dashboard')}
+            >
+              Dashboard
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -10,9 +10,11 @@ import { AuthContext } from './context/authContext';
 import { useContext } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
+
   return (
     <div className='app'>
       <div className='container'>
@@ -28,6 +30,9 @@ function App() {
             <Route path='/' element={<SharedLayout />}>
               <Route index element={<Home />} />
               {currentUser && <Route path='/write' element={<Write />} />}
+              {currentUser?.isAdmin === 'true' && (
+                <Route path='/dashboard' element={<Dashboard />} />
+              )}
               <Route path='/post/:id' element={<Single />} />
             </Route>
             <Route path='/login' element={<Login />} />
