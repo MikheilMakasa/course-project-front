@@ -24,9 +24,7 @@ const Home = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${api}/posts${cat}`, {
-          params: { sort: sortBy },
-        });
+        const res = await axios.get(`${api}/posts${cat}`);
         setPosts(res.data);
         setLoading(false);
       } catch (error) {
