@@ -206,6 +206,7 @@ $darkBlue: #3c3cfd;
         gap: 60px;
 
         .search {
+          display: flex;
           input {
             padding: 10px 20px;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
@@ -215,6 +216,19 @@ $darkBlue: #3c3cfd;
 
             font-size: 16px;
             outline: none;
+          }
+
+          .sort {
+            margin-left: 8px;
+            padding: 11px;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+            input {
+              border: none;
+
+              font-size: 16px;
+              outline: none;
+            }
           }
         }
 
@@ -857,6 +871,10 @@ $darkBlue: #3c3cfd;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            input {
+              margin-bottom: 12px;
+            }
           }
           .post {
             display: block;

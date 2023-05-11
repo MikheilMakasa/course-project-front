@@ -13,6 +13,7 @@ import { AuthContext } from '../context/authContext';
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('newest'); // New state variable for sorting
   const navigate = useNavigate();
   const { loading, setLoading } = useContext(AuthContext);
 
@@ -23,7 +24,9 @@ const Home = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${api}/posts${cat}`);
+        const res = await axios.get(`${api}/posts${cat}`, {
+          params: { sort: sortBy },
+        });
         setPosts(res.data);
         setLoading(false);
       } catch (error) {
@@ -33,7 +36,7 @@ const Home = () => {
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cat]);
+  }, [cat, sortBy]);
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -43,9 +46,20 @@ const Home = () => {
     post.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Sort posts
+  if (sortBy === 'newest') {
+    filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } else if (sortBy === 'oldest') {
+    filteredPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
+  }
+
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent;
+  };
+
+  const handleSortChange = (event) => {
+    setSortBy(event.target.value);
   };
 
   return (
@@ -64,6 +78,10 @@ const Home = () => {
               value={searchQuery}
               onChange={handleSearch}
             />
+            <select value={sortBy} onChange={handleSortChange} className='sort'>
+              <option value='newest'>Sort by Newest</option>
+              <option value='oldest'>Sort by Oldest</option>
+            </select>
           </div>
 
           {filteredPosts.map((post) => (
